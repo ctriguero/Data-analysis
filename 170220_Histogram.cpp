@@ -86,12 +86,28 @@ int main( int argc, const char* argv[] )
 	
 	std::cout << YELLOW << "    -> File " << BOLDYELLOW << argv[1] << RESET << YELLOW << " found" << RESET << std::endl ;
 
-	// Parameters:
-	//----------------------------------------------------------------------------------------------------------------------------
-	//----------------------------------------------------------------------------------------------------------------------------	
-	unsigned int bins = 100 ;		// Number of bins
-	//----------------------------------------------------------------------------------------------------------------------------
-	//----------------------------------------------------------------------------------------------------------------------------		
+	unsigned int bins = 100 ;		// Number of bins default
+	
+	for ( int k = 1; k < argc ; ++k )
+	{
+		if ( ( argv[k] == std::string("-h") ) || ( argv[k] == std::string("-HELP") ) || ( argv[k] == std::string("-H") ) || ( argv[k] == std::string("-help") ) )
+		{ 
+			cout  << BOLDBLACK << "    HELP:" << RESET << std::endl ;
+			cout << "    Generates a histogram with the second column of a file containing real data" << std::endl ;
+			cout << "    [Column can be changed and also addapted to integer data]" << std::endl ;
+			cout << "    ------------------------------------------------" << std::endl ;
+			cout << BOLDBLACK << "    Execution: ./a.out file.dat [+flags]" << RESET << std::endl ; 
+			cout << BOLDBLACK << "    Mandatory flags:" << RESET << std::endl ; 
+			cout << "    -bins" << "\t" << "    to set the number of bins (e.g. ./a.out file.dat -bins 100) default bins=100" << std::endl ;
+			cout << BOLDBLACK << "    Optional flags:" << RESET << std::endl ;
+			cout << "    -h" << "\t" << "    to get help  (e.g. ./a.out -help)" << std::endl ; 
+			cout << "    -gle" << "\t" << "    to generate gle graphs of histogram and PDF  (e.g. ./a.out file.dat -bins 100 -gle)" << std::endl ; 
+			cout << std::endl ;
+			return (0) ;
+		}
+		if ( ( argv[k] == std::string("-bins") ) || ( argv[k] == std::string("-bin") )  || ( argv[k] == std::string("-b") ) ) { bins = atoi(argv[k+1]) ; }
+//		if ( ( argv[k] == std::string("-gle") ) || ( argv[k] == std::string("-g") )  || ( argv[k] == std::string("-GLE") ) ) { Ly = atoi(argv[k+1]) ; }
+	}	
 	
 	double minval ;		// Radius of type 1 atoms.
 	double maxval ;		// Radius of type 2 atoms.
