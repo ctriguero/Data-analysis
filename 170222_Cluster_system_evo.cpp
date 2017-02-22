@@ -90,7 +90,7 @@ using namespace std;
 			OutputFile << "#include \"textures.inc\"\n";
 			OutputFile << "\n";
 			OutputFile << "background{White}\n";
-			OutputFile << "camera { up <0,1,0> right <1,0,0> location <0.0,0.0,200.0> look_at <0,0,0> angle 0 rotate <0,clock*360,0>}\n";
+			OutputFile << "camera { up <0,1,0> right <1,0,0> location <0.0,0.0,100.0> look_at <0,0,0> angle 0 rotate <0,clock*360,0>}\n";
 			OutputFile << "light_source { <0, 100,0> color White }\n";
 			OutputFile << "light_source { <0,-100,0> color White }\n";
 			OutputFile << "light_source { < 100,0,0> color White }\n";
@@ -165,11 +165,10 @@ using namespace std;
 			OutputFile.close () ;
 
 			stringstream pp;
-			pp << "povray " << ss.str().c_str() << " +A Quality=7 +W1000 +H1000";
+//			pp << "povray " << ss.str().c_str() << " +A Quality=7 +W1000 +H1000"; // Intermediate
+			pp << "povray " << ss.str().c_str() << " +W1000 +H1000"; // Intermediate
 			system( pp.str().c_str() );
-//			system("povray "OutputFile" +A Quality=7 +W1000 +H1000") ; // Intermediate
-//////			system("povray frame_no_*.pov +W1000 +H1000") ; // Basic quality
-//			std::remove(ss.str().c_str()); 
+			std::remove(ss.str().c_str()); 
 		}
 	}
 
