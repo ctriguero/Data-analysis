@@ -1,0 +1,8 @@
+(1)	From lammps file out.lammps we can crop the size of the simulation box as a function of the time step.
+	This can be easily done with in escape mode: vi CTRL v select the columns and then CTRL G to go to the final then 		press d to delete. We build the file:
+
+	box.data
+
+(2)	Now in the trajectory file xyz we have to replace the command line by the box size. Plumed will interpret correctly 		this numbers.
+	To be cleaner we can remove the comment line information by doing
+	sed -i 's/^At.*//g' traj_all.xyz
