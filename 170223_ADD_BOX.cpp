@@ -57,6 +57,7 @@ int main( int argc, const char* argv[] )
 	std::cout << BOLDYELLOW << "        _(<_   / )_                                  " << RESET << std::endl ;
 	std::cout << BOLDYELLOW << "       (__\\_\\_|_/__)                               " << RESET << std::endl ;
 	std::cout << BOLDYELLOW << "    _________________________________________________" << RESET << std::endl ;
+	std::cout << BOLDYELLOW << "    Add box for plumed analysis of NPT simulations   " << RESET << std::endl ;
 	std::cout << endl ;
 
 //	PARAMETERS

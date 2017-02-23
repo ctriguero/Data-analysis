@@ -1,5 +1,5 @@
 (1)	From lammps file out.lammps we can crop the size of the simulation box as a function of the time step.
-	This can be easily done with in escape mode: vi CTRL v select the columns and then CTRL G to go to the final then 		press d to delete. We build the file:
+	This can be easily done with in escape mode: vi CTRL v select the columns and then CTRL G to go to the final then 		press d to delete. We build the file Leave also the time step column to synchronize with trajectory that is usually 		less frequently saved.
 
 	box.data
 
