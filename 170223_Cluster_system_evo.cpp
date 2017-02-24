@@ -31,6 +31,8 @@ using namespace std;
         std::ifstream InputFile1( "Cluster1_Ang.xyz" ) ; // file where the extraction is performed
 	std::ifstream InputFile2( "Cluster2_Ang.xyz" ) ; // file where the extraction is performed
 	std::ifstream InputFile3( "Cluster3_Ang.xyz" ) ; // file where the extraction is performed
+	std::ifstream InputFile4( "Cluster4_Ang.xyz" ) ; // file where the extraction is performed
+	std::ifstream InputFile5( "Cluster5_Ang.xyz" ) ; // file where the extraction is performed
         
         std::string line ;    // variable string to read the line
         
@@ -107,8 +109,8 @@ using namespace std;
 				std::getline(InputFile, line);
 				std::stringstream cc(line);
 				cc >> element >> x >> y >> z ;
-				if ( element == 1 ) { OutputFile << "sphere { <" << x << "," << y << "," << z << ">," << Rgas << " pigment { rgbt <0,0,1,0.7>} finish { phong 0.7 phong_size 20 }}" << std::endl ; }
-				if ( element == 2 ) { OutputFile << "sphere { <" << x << "," << y << "," << z << ">," << Rliquid << " pigment { rgbt <1,0,0,0.7>} finish { phong 0.7 phong_size 20 }}" << std::endl ; }
+				if ( element == 1 ) { OutputFile << "sphere { <" << x << "," << y << "," << z << ">," << Rgas << " pigment { rgbt <0,0,1,0.80>} finish { phong 0.7 phong_size 20 }}" << std::endl ; }
+				if ( element == 2 ) { OutputFile << "sphere { <" << x << "," << y << "," << z << ">," << Rliquid << " pigment { rgbt <1,0,0,0.80>} finish { phong 0.7 phong_size 20 }}" << std::endl ; }
 			}
 			OutputFile.close () ;
 		}
@@ -278,6 +280,122 @@ using namespace std;
 				OutputFile << "sphere { <" << x << "," << y << "," << z << ">," << Rgas+0.01 << " pigment { rgbt <0.5,0.7,0.2,0>} finish { phong 0.7 phong_size 20 }}\n";
 			}
 			OutputFile.close () ;
+		}
+	}
+	InputFile3.close() ;
+
+
+
+
+
+
+// 4th file
+	FrameCounter = 0 ;
+	while( std::getline( InputFile4, line ) )
+	{
+		std::stringstream cc(line) ; //process first line
+
+		if (line.length() < 5) // maximum number of digits for the number of atoms is 5
+		{
+			cc >> Natoms ; // Gets the number of atoms in this specific frame (not constant anymore)
+//			cout << "Natoms= " << Natoms << std::endl ;
+//			cout << "Frame= " << FrameCounter << std::endl ;
+			getline(InputFile4, line) ; //process segunda línea comment line (sin hacer nada)
+
+			// BEGIN Build the nema of the different povray files
+			FrameCounter++ ;
+			std::ostringstream ss;
+			std::ofstream OutputFile;
+			if ( FrameCounter <= 9)
+			{
+				ss << "frame_no_000" << FrameCounter << ".pov";
+				OutputFile.open(ss.str().c_str(), std::ofstream::app);
+			}
+
+			if ( (FrameCounter > 9) && (FrameCounter <= 99))
+			{
+				ss << "frame_no_00" << FrameCounter << ".pov";
+				OutputFile.open(ss.str().c_str(), std::ofstream::app);
+			}
+
+			if ( (FrameCounter > 99) && (FrameCounter <= 999))
+			{
+				ss << "frame_no_0" << FrameCounter << ".pov";
+				OutputFile.open(ss.str().c_str(), std::ofstream::app);
+			}
+
+			if ( (FrameCounter > 999) && (FrameCounter <= 9999))
+			{
+				ss << "frame_no_" << FrameCounter << ".pov";
+				OutputFile.open(ss.str().c_str(), std::ofstream::app);
+			}
+			// END Build the nema of the different povray files
+			for (int i=0; i<Natoms; i++)
+			{
+
+				std::getline(InputFile4, line);
+				std::stringstream bb(line);
+				bb >> element >> x >> y >> z ;
+				OutputFile << "sphere { <" << x << "," << y << "," << z << ">," << Rgas+0.01 << " pigment { rgbt <0.3,0.0,0.9,0>} finish { phong 0.7 phong_size 20 }}\n";
+			}
+			OutputFile.close () ;
+		}
+	}
+	InputFile4.close() ;
+
+
+
+
+// 5th file
+	FrameCounter = 0 ;
+	while( std::getline( InputFile5, line ) )
+	{
+		std::stringstream cc(line) ; //process first line
+
+		if (line.length() < 5) // maximum number of digits for the number of atoms is 5
+		{
+			cc >> Natoms ; // Gets the number of atoms in this specific frame (not constant anymore)
+//			cout << "Natoms= " << Natoms << std::endl ;
+//			cout << "Frame= " << FrameCounter << std::endl ;
+			getline(InputFile5, line) ; //process segunda línea comment line (sin hacer nada)
+
+			// BEGIN Build the nema of the different povray files
+			FrameCounter++ ;
+			std::ostringstream ss;
+			std::ofstream OutputFile;
+			if ( FrameCounter <= 9)
+			{
+				ss << "frame_no_000" << FrameCounter << ".pov";
+				OutputFile.open(ss.str().c_str(), std::ofstream::app);
+			}
+
+			if ( (FrameCounter > 9) && (FrameCounter <= 99))
+			{
+				ss << "frame_no_00" << FrameCounter << ".pov";
+				OutputFile.open(ss.str().c_str(), std::ofstream::app);
+			}
+
+			if ( (FrameCounter > 99) && (FrameCounter <= 999))
+			{
+				ss << "frame_no_0" << FrameCounter << ".pov";
+				OutputFile.open(ss.str().c_str(), std::ofstream::app);
+			}
+
+			if ( (FrameCounter > 999) && (FrameCounter <= 9999))
+			{
+				ss << "frame_no_" << FrameCounter << ".pov";
+				OutputFile.open(ss.str().c_str(), std::ofstream::app);
+			}
+			// END Build the nema of the different povray files
+			for (int i=0; i<Natoms; i++)
+			{
+
+				std::getline(InputFile5, line);
+				std::stringstream bb(line);
+				bb >> element >> x >> y >> z ;
+				OutputFile << "sphere { <" << x << "," << y << "," << z << ">," << Rgas+0.01 << " pigment { rgbt <1.0,0.2,1.0,0>} finish { phong 0.7 phong_size 20 }}\n";
+			}
+			OutputFile.close () ;
 
 			stringstream pp;
 //			pp << "povray " << ss.str().c_str() << " +A Quality=7 +W1000 +H1000"; // Intermediate
@@ -286,8 +404,7 @@ using namespace std;
 			std::remove(ss.str().c_str()); 
 		}
 	}
-	InputFile2.close() ;
-
+	InputFile5.close() ;
 
 
 
