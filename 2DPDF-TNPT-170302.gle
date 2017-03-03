@@ -1,0 +1,108 @@
+size 11 8
+
+sub Kmax x
+   return x*(x-1)
+end sub
+
+sub Kmin x
+   return 2*(x-2)+2
+end sub
+
+set texlabels 1
+begin graph
+	scale  auto
+	xtitle "Size, $S$"
+	ytitle "Sum of degrees in largest cluster, $K$"
+	let d1 = Kmax(x) from 2.8 to 57
+	let d2 = Kmin(x) from 2.8 to 57
+	!data kksicv.dat d3=c2,c4
+	d1 line color black lwidth 0.05 lstyle 9
+	d2 line color black lwidth 0.05
+	!d3 marker fcircle color black msize 0.1
+
+	data Layer_no_0001.dat d4
+	data Layer_no_0002.dat d5
+	data Layer_no_0003.dat d6
+	data Layer_no_0004.dat d7
+	data Layer_no_0005.dat d8
+	data Layer_no_0006.dat d9
+	data Layer_no_0008.dat d10
+	
+
+	!for alpha = 4 to 11
+	!	d[alpha] marker fsquare msize 0.11 color rgb((alpha-4)/10,0,(14-alpha)/10) !!!key "$\alpha = "+num$(alpha)+"$"
+	!next alpha
+
+!	d4 marker fsquare color lightcyan msize 0.1
+!	d5 marker fsquare color lightskyblue msize 0.1
+!	d6 marker fsquare color deepskyblue msize 0.1
+!	d7 marker fsquare color dodgerblue msize 0.1
+!	d8 marker fsquare color blue msize 0.1
+!	d9 marker fsquare color lightcoral msize 0.1
+!	d10 marker fsquare color palevioletred msize 0.1
+!	d11 marker fsquare color tomato msize 0.1
+
+	d4 marker fsquare color lightcyan msize 0.1
+	d5 marker fsquare color lightskyblue msize 0.1
+	d6 marker fsquare color blue msize 0.1
+	d7 marker fsquare color lightcoral msize 0.1
+	d8 marker fsquare color palevioletred msize 0.1
+	d9 marker fsquare color tomato msize 0.1
+	d10 marker fsquare color red msize 0.1
+	d11 marker fsquare color firebrick msize 0.1
+
+
+	let d12 = Kmax(x) from 2.8 to 57
+	d12 line color black lwidth 0.05 lstyle 9
+	let d13 = Kmin(x) from 2.8 to 57
+	d13 line color black lwidth 0.05 lstyle 9
+
+	xaxis min 1.5 max 60 !  log format "sci 0 10"
+	yaxis min 1.0 max 3500 log format "sci 0 10"
+	xplaces 2 3 4 5 6 7 8 9 15 20 30 40 50 60
+	xnames "2" "3" "4" "5" "6" "7" "8" "9" "15" "20" "30" "40" "50" "60"
+end graph
+
+begin key
+pos tl
+nobox
+line color black lwidth 0.05 lstyle 9 text "$K_{\rm max}(S)$"
+line color black lwidth 0.05 text "$K_{\rm min}(S)$"
+end key
+
+set hei 0.3
+begin key
+pos br
+nobox
+text "T-clustering Metadynamics - NPT" color red 
+set color black
+text "Histogram over $2.6\cdot 10^5$ data points"
+end key
+
+set hei 0.3
+amove xg(3) yg(0.4)
+text Embryo
+amove xg(53) yg(0.4)
+text Mature
+
+set hei 0.15
+set color black
+amove xg(42) yg(60)
+text Minimally-connected (Tree graph)
+amove xg(25) yg(1500)
+text Fully-connected graph
+set color black
+
+
+
+! Configuration frame examples
+! Atomic-force microscopy image at the upper right corner.
+amove xg(15.5) yg(2.7)
+begin name img
+   bitmap "frame_no_0004_S20.png" 1.5 1.5
+end name
+
+amove xg(35.5) yg(2.7)
+begin name img
+   bitmap "frame_no_0084_S41.png" 1.5 1.5
+end name
