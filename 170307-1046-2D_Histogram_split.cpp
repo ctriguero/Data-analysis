@@ -58,7 +58,7 @@ int main( int argc, const char* argv[] )
 	std::cout << BOLDYELLOW << "    ____________________________________________________" << std::endl ;
 	std::cout << BOLDYELLOW << "            _=_                                         " << RESET << std::endl ;
 	std::cout << BOLDYELLOW << "          q(-_-)p                                       " << RESET << std::endl ;
-	std::cout << BOLDYELLOW << "          '_) (_`         2D INTEGER HISTOGRAM GENERATOR" << RESET << std::endl ;
+	std::cout << BOLDYELLOW << "          '_) (_`         2D HISTOGRAM GENERATOR        " << RESET << std::endl ;
 	std::cout << BOLDYELLOW << "          /__/  \\         Carles Triguero 2017         " << RESET << std::endl ;
 	std::cout << BOLDYELLOW << "        _(<_   / )_                                     " << RESET << std::endl ;
 	std::cout << BOLDYELLOW << "       (__\\_\\_|_/__)                                  " << RESET << std::endl ;
@@ -69,8 +69,30 @@ int main( int argc, const char* argv[] )
 	if ( argc == 1 )
 	{
 		cout << "\t Wrong usage. You should execute:" << endl ;
-		cout << BOLDRED << "\t " << argv[0] << " [File to analyze.dat]" << RESET << endl ;
+		cout << BOLDRED << "\t " << argv[0] << " [File to analyze.dat] -kbins [number]" << RESET << endl ;
 		cout << " " << endl ;
+		return (0) ;
+	}
+
+
+	if ( ( argv[1] == std::string("-h") ) || ( argv[1] == std::string("-HELP") ) || ( argv[1] == std::string("-H") ) || ( argv[1] == std::string("-help") ) )
+	{ 
+		cout  << BOLDRED << "    HELP:" << RESET << std::endl ;
+		cout << "    Description of the program:" << std::endl ;
+		cout << "    -------------------------------------------------------------------------------------------------------------------" << std::endl ;
+		cout << "    (1) Generates a 2D histogram from the at least two column file column of a file containing real data: D(X,Y)" << std::endl ;
+		cout << "        [Column can be changed and also addapted to integer data]" << std::endl ;
+		cout << "    (2) Outputs the different iso-frequency layers for an easy plot (The number of layers can be chosen, by default 8)." << std::endl ;
+		cout << "    (3) Generates the conditional probability for each value of the first random variable: D(Y|X)" << std::endl ;
+		cout << "    (4) Calculates the most likely path over the 2D space of random variables: Y(X)" << std::endl ;
+		cout << "    -------------------------------------------------------------------------------------------------------------------" << std::endl ;
+		cout << BOLDRED << "    Execution: ./a.out file.dat [+flags]" << RESET << std::endl ; 
+		cout << BOLDRED << "    Mandatory flags:" << RESET << std::endl ; 
+		cout << "    -bins" << "\t" << "    to set the number of kbins (e.g. ./a.out file.dat -bins 100) default bins=100" << std::endl ;
+		cout << BOLDRED << "    Optional flags:" << RESET << std::endl ;
+		cout << "    -h" << "\t" << "    to get help  (e.g. ./a.out -help)" << std::endl ;
+		cout << "    -l" << "\t" << "    to set the number of layers for the iso-frequency" << std::endl ;  
+		cout << std::endl ;
 		return (0) ;
 	}
 	
@@ -78,7 +100,7 @@ int main( int argc, const char* argv[] )
 	ifstream file(argv[1]) ;
 	if (!file)
 	{
-    	std::cout << BOLDRED <<"    -> ERROR: File test.xyz does not exist. ABORTING" << RESET << std::endl ;
+    	std::cout << BOLDRED <<"    -> ERROR: File " << argv[1] << " does not exist. ABORTING" << RESET << std::endl ;
     	std::cout << std::endl ;
 		abort () ;
 	}
@@ -86,7 +108,8 @@ int main( int argc, const char* argv[] )
 	
 	std::cout << YELLOW << "    -> File " << BOLDYELLOW << argv[1] << RESET << YELLOW << " found" << RESET << std::endl ;
 
-	unsigned int bins = 100 ;		// Number of bins default
+	unsigned int Kbins = 1000 ;		// Default Number of Kbins 
+	unsigned int Layers = 8 ;
 	
 	for ( int k = 1; k < argc ; ++k )
 	{
@@ -98,16 +121,19 @@ int main( int argc, const char* argv[] )
 			cout << "    ------------------------------------------------" << std::endl ;
 			cout << BOLDBLACK << "    Execution: ./a.out file.dat [+flags]" << RESET << std::endl ; 
 			cout << BOLDBLACK << "    Mandatory flags:" << RESET << std::endl ; 
-			cout << "    -bins" << "\t" << "    to set the number of bins (e.g. ./a.out file.dat -bins 100) default bins=100" << std::endl ;
+			cout << "    -bins" << "\t" << "    to set the number of kbins (e.g. ./a.out file.dat -bins 100) default bins=100" << std::endl ;
 			cout << BOLDBLACK << "    Optional flags:" << RESET << std::endl ;
 			cout << "    -h" << "\t" << "    to get help  (e.g. ./a.out -help)" << std::endl ; 
-			cout << "    -gle" << "\t" << "    to generate gle graphs of histogram and PDF  (e.g. ./a.out file.dat -bins 100 -gle)" << std::endl ; 
 			cout << std::endl ;
 			return (0) ;
 		}
-		if ( ( argv[k] == std::string("-bins") ) || ( argv[k] == std::string("-bin") )  || ( argv[k] == std::string("-b") ) ) { bins = atoi(argv[k+1]) ; }
+		if ( ( argv[k] == std::string("-kbins") ) || ( argv[k] == std::string("-kbin") )  || ( argv[k] == std::string("-kb") )  || ( argv[k] == std::string("-b") ) ) { Kbins = atoi(argv[k+1]) ; }
+		if ( ( argv[k] == std::string("-layers") ) || ( argv[k] == std::string("-Layers") )  || ( argv[k] == std::string("-l") )  || ( argv[k] == std::string("-L") ) ) { Layers = atoi(argv[k+1]) ; }
 //		if ( ( argv[k] == std::string("-gle") ) || ( argv[k] == std::string("-g") )  || ( argv[k] == std::string("-GLE") ) ) { Ly = atoi(argv[k+1]) ; }
-	}	
+	}
+
+	cout << YELLOW << "    -> Iso-frequency layers set to: " << BOLDYELLOW << Layers << RESET << endl ;
+	cout << YELLOW << "    -> Number of connectivity degree bins set to: " << BOLDYELLOW << Kbins << RESET << endl ;		
 	
 	double Smaxval, Sminval, Kmaxval, Kminval ;
 	
@@ -169,7 +195,6 @@ int main( int argc, const char* argv[] )
 
 	// BEGIN Frequency matrix to generate the 2D histogram
 	int Sbins = Smaxval+1 ;
-	unsigned int Kbins = 1000 ;
 	double KInterval = (Kmaxval-Kminval)/Kbins ;
 	
 	std::vector<std::vector<int> > Frequency;
@@ -231,7 +256,6 @@ int main( int argc, const char* argv[] )
 
 
 	// BEGIN Files to store data by layers
-	unsigned int Layers = 8 ;
 	std::cout << YELLOW << "    -> Layers for heat map plot equal to " << RESET << BOLDYELLOW << Layers << RESET << endl ;
 	unsigned int LimitDown ;
 	unsigned int LimitUp ;
@@ -302,7 +326,7 @@ int main( int argc, const char* argv[] )
 		
 		for ( int nk = 0; nk < Kbins ; ++nk ) 
 		{
-			if ( Frequency[ns][nk] == LikelyPathK ) 
+			if ( ( Frequency[ns][nk] == LikelyPathK ) && ( ns > 2 ) ) 
 			{
 				MAXPPATH << ns << "\t" << nk*KInterval+KInterval/2.0 << std::endl ; 
 				cout << nk << "    " << ns << "    " << nk*KInterval+KInterval/2.0 << std::endl ;
