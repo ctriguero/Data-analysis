@@ -8,7 +8,7 @@ sub Kmin x
    return 2*(x-2)+2
 end sub
 
-Layers = 20
+Layers = 40
 
 set texlabels 1
 begin graph
@@ -26,7 +26,7 @@ begin graph
 	data Layer_no_0007.dat d7
 	data Layer_no_0008.dat d8
 	data Layer_no_0009.dat d9
-	data Layer_no_0010.dat d10
+	data Layer_no_00010.dat d10
 
 	data Layer_no_0011.dat d11
 	data Layer_no_0012.dat d12
@@ -39,6 +39,28 @@ begin graph
 	data Layer_no_0019.dat d19
 	data Layer_no_0020.dat d20
 	
+	data Layer_no_0021.dat d21
+	data Layer_no_0022.dat d22
+	data Layer_no_0023.dat d23
+	data Layer_no_0024.dat d24
+	data Layer_no_0025.dat d25
+	data Layer_no_0026.dat d26
+	data Layer_no_0027.dat d27
+	data Layer_no_0028.dat d28
+	data Layer_no_0029.dat d29
+	data Layer_no_0030.dat d30
+
+	data Layer_no_0031.dat d31
+	data Layer_no_0032.dat d32
+	data Layer_no_0033.dat d33
+	data Layer_no_0034.dat d34
+	data Layer_no_0035.dat d35
+	data Layer_no_0036.dat d36
+	data Layer_no_0037.dat d37
+	data Layer_no_0038.dat d38
+	data Layer_no_0039.dat d39
+	data Layer_no_0040.dat d40
+
 
 !	for alpha = 1 to 20
 !		d[alpha] marker fsquare msize 0.11 color rgb((alpha-1)^0.5/(Layers-1)^0.5,(Layers-alpha-1)^7/(Layers-1)^7,(Layers-alpha-1)^4/(Layers-1)^4)
@@ -60,7 +82,7 @@ begin graph
 !		d[alpha] marker fsquare msize 0.11 color rgb((alpha-1)^0.5/(Layers-1)^0.5+(Layers-alpha-1)^10/(Layers-1)^10,(Layers-alpha-1)^4/(Layers-1)^4,(Layers-alpha-1)^5/(Layers-1)^5)
 !	next alpha
 
-	for alpha = 1 to 20
+	for alpha = 1 to Layers
 		d[alpha] marker fsquare msize 0.11 color rgb((alpha-1)^0.5/(Layers-1)^0.5+(Layers-alpha-1)^10/(Layers-1)^10,(Layers-alpha-1)^3/(Layers-1)^3,(Layers-alpha-1)^5/(Layers-1)^5)
 	next alpha
 
