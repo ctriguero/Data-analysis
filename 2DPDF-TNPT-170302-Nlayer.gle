@@ -1,0 +1,123 @@
+size 11 8
+
+sub Kmax x
+   return x*(x-1)
+end sub
+
+sub Kmin x
+   return 2*(x-2)+2
+end sub
+
+Layers = 20
+
+set texlabels 1
+begin graph
+	scale  auto
+	xtitle "Size, $S$"
+	ytitle "Sum of degrees in largest cluster, $K$"
+	
+
+	data Layer_no_0001.dat d1
+	data Layer_no_0002.dat d2
+	data Layer_no_0003.dat d3
+	data Layer_no_0004.dat d4
+	data Layer_no_0005.dat d5
+	data Layer_no_0006.dat d6
+	data Layer_no_0007.dat d7
+	data Layer_no_0008.dat d8
+	data Layer_no_0009.dat d9
+	data Layer_no_0010.dat d10
+
+	data Layer_no_0011.dat d11
+	data Layer_no_0012.dat d12
+	data Layer_no_0013.dat d13
+	data Layer_no_0014.dat d14
+	data Layer_no_0015.dat d15
+	data Layer_no_0016.dat d16
+	data Layer_no_0017.dat d17
+	data Layer_no_0018.dat d18
+	data Layer_no_0019.dat d19
+	data Layer_no_0020.dat d20
+	
+
+!	for alpha = 1 to 20
+!		d[alpha] marker fsquare msize 0.11 color rgb((alpha-1)^0.5/(Layers-1)^0.5,(Layers-alpha-1)^7/(Layers-1)^7,(Layers-alpha-1)^4/(Layers-1)^4)
+!	next alpha
+
+!	for alpha = 1 to 20
+!		d[alpha] marker fsquare msize 0.11 color rgb((alpha-1)^0.5/(Layers-1)^0.5,(Layers-alpha-1)^5/(Layers-1)^5,(Layers-alpha-1)^5/(Layers-1)^5)
+!	next alpha
+
+!	for alpha = 1 to 20
+!		d[alpha] marker fsquare msize 0.11 color rgb((alpha-1)^0.5/(Layers-1)^0.5+(Layers-alpha-1)^7/(Layers-1)^7,(Layers-alpha-1)^5/(Layers-1)^5,(Layers-alpha-1)^5/(Layers-1)^5)
+!	next alpha
+
+!	for alpha = 1 to 20
+!		d[alpha] marker fsquare msize 0.11 color rgb((alpha-1)^0.5/(Layers-1)^0.5+(Layers-alpha-1)^10/(Layers-1)^10,(Layers-alpha-1)^10/(Layers-1)^10,(Layers-alpha-1)^5/(Layers-1)^5)
+!	next alpha
+
+!	for alpha = 1 to 20
+!		d[alpha] marker fsquare msize 0.11 color rgb((alpha-1)^0.5/(Layers-1)^0.5+(Layers-alpha-1)^10/(Layers-1)^10,(Layers-alpha-1)^4/(Layers-1)^4,(Layers-alpha-1)^5/(Layers-1)^5)
+!	next alpha
+
+	for alpha = 1 to 20
+		d[alpha] marker fsquare msize 0.11 color rgb((alpha-1)^0.5/(Layers-1)^0.5+(Layers-alpha-1)^10/(Layers-1)^10,(Layers-alpha-1)^3/(Layers-1)^3,(Layers-alpha-1)^5/(Layers-1)^5)
+	next alpha
+
+
+	let d[Layers+1] = Kmax(x) from 2.8 to 57
+	d[Layers+1] line color black lwidth 0.05 lstyle 9
+	
+	let d[Layers+2] = Kmin(x) from 2.8 to 57
+	d[Layers+2] line color black lwidth 0.05 lstyle 0
+	
+
+	xaxis min 1.5 max 60 !  log format "sci 0 10"
+	yaxis min 1.0 max 3500 log format "sci 0 10"
+	xplaces 2 3 4 5 6 7 8 9 15 20 30 40 50 60
+	xnames "2" "3" "4" "5" "6" "7" "8" "9" "15" "20" "30" "40" "50" "60"
+end graph
+
+begin key
+pos tl
+nobox
+line color black lwidth 0.05 lstyle 9 text "$K_{\rm max}(S)$"
+line color black lwidth 0.05 text "$K_{\rm min}(S)$"
+end key
+
+set hei 0.3
+begin key
+pos br
+nobox
+text "T-clustering Metadynamics - NPT" color red 
+set color black
+text "Histogram over $3.1\cdot 10^5$ data points"
+end key
+
+set hei 0.3
+amove xg(3) yg(0.4)
+text Embryo
+amove xg(53) yg(0.4)
+text Mature
+
+set hei 0.15
+set color black
+amove xg(42) yg(60)
+text Minimally-connected (Tree graph)
+amove xg(25) yg(1500)
+text Fully-connected graph
+set color black
+
+
+
+! Configuration frame examples
+! Atomic-force microscopy image at the upper right corner.
+amove xg(15.5) yg(2.7)
+begin name img
+   bitmap "frame_no_0004_S20.png" 1.5 1.5
+end name
+
+amove xg(35.5) yg(2.7)
+begin name img
+   bitmap "frame_no_0084_S41.png" 1.5 1.5
+end name

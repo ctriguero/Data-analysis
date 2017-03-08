@@ -296,45 +296,45 @@ int main( int argc, const char* argv[] )
 
 
 
-	// BEGIN D(K|S): Conditional probability for each size. Each size in one file, and max probability path over space <K,S>.
-	std::cout << YELLOW << "    -> Storing conditional probability density for each of the " << RESET << BOLDYELLOW << Sbins-1 << " sizes " << RESET << endl ;
-	std::vector<double> Ssection ;
-	ofstream MAXPPATH ;
-	MAXPPATH.open ("Likely_SK_path.dat", ios::out | ios::trunc); // All computed densities inside cylinders
-	
-	for ( int ns = 1; ns < Sbins ; ++ns )
-	{
-		// Naming different size distributions
-		std::ostringstream dd;
-                std::ofstream K_PDF_at_S;
-		if (   ns <= 9 ) { dd << "DKatS_no_000" << ns << ".dat" ;}
-		if ( ( ns > 9 ) && ( ns <= 99 ) ) { dd << "DKatS_no_00" << ns << ".dat" ;}
-		if ( ( ns > 99 ) && ( ns <= 999 ) ) { dd << "DKatS_no_0" << ns << ".dat" ;}
-		if ( ( ns > 999 ) && ( ns <= 9999 ) ) { dd << "DKatS_no_" << ns << ".dat" ;}
-		
-		K_PDF_at_S.open(dd.str().c_str());
+////	// BEGIN D(K|S): Conditional probability for each size. Each size in one file, and max probability path over space <K,S>.
+////	std::cout << YELLOW << "    -> Storing conditional probability density for each of the " << RESET << BOLDYELLOW << Sbins-1 << " sizes " << RESET << endl ;
+////	std::vector<double> Ssection ;
+////	ofstream MAXPPATH ;
+////	MAXPPATH.open ("Likely_SK_path.dat", ios::out | ios::trunc); // All computed densities inside cylinders
+////	
+////	for ( int ns = 1; ns < Sbins ; ++ns )
+////	{
+////		// Naming different size distributions
+////		std::ostringstream dd;
+////                std::ofstream K_PDF_at_S;
+////		if (   ns <= 9 ) { dd << "DKatS_no_000" << ns << ".dat" ;}
+////		if ( ( ns > 9 ) && ( ns <= 99 ) ) { dd << "DKatS_no_00" << ns << ".dat" ;}
+////		if ( ( ns > 99 ) && ( ns <= 999 ) ) { dd << "DKatS_no_0" << ns << ".dat" ;}
+////		if ( ( ns > 999 ) && ( ns <= 9999 ) ) { dd << "DKatS_no_" << ns << ".dat" ;}
+////		
+////		K_PDF_at_S.open(dd.str().c_str());
 
-		unsigned int LikelyPathK = 0 ;
-		
-		for ( int nk = 0; nk < Kbins ; ++nk )
-		{
-			K_PDF_at_S << nk*KInterval+KInterval/2.0 << "\t" << Frequency[ns][nk] << std::endl ;
+////		unsigned int LikelyPathK = 0 ;
+////		
+////		for ( int nk = 0; nk < Kbins ; ++nk )
+////		{
+////			K_PDF_at_S << nk*KInterval+KInterval/2.0 << "\t" << Frequency[ns][nk] << std::endl ;
 
-			if ( Frequency[ns][nk] > LikelyPathK ) { LikelyPathK = Frequency[ns][nk] ; }
-		}
-		K_PDF_at_S.close () ;
-		
-		for ( int nk = 0; nk < Kbins ; ++nk ) 
-		{
-			if ( ( Frequency[ns][nk] == LikelyPathK ) && ( ns > 2 ) ) 
-			{
-				MAXPPATH << ns << "\t" << nk*KInterval+KInterval/2.0 << std::endl ; 
-				cout << nk << "    " << ns << "    " << nk*KInterval+KInterval/2.0 << std::endl ;
-			}
-		}	
-	}
-	MAXPPATH.close () ;
-	// END D(K|S): Conditional probability for each size. Each size in one file, and max probability path over space <K,S>.
+////			if ( Frequency[ns][nk] > LikelyPathK ) { LikelyPathK = Frequency[ns][nk] ; }
+////		}
+////		K_PDF_at_S.close () ;
+////		
+////		for ( int nk = 0; nk < Kbins ; ++nk ) 
+////		{
+////			if ( ( Frequency[ns][nk] == LikelyPathK ) && ( ns > 2 ) ) 
+////			{
+////				MAXPPATH << ns << "\t" << nk*KInterval+KInterval/2.0 << std::endl ; 
+//////				cout << nk << "    " << ns << "    " << nk*KInterval+KInterval/2.0 << std::endl ;
+////			}
+////		}	
+////	}
+////	MAXPPATH.close () ;
+////	// END D(K|S): Conditional probability for each size. Each size in one file, and max probability path over space <K,S>.
 
 
 
