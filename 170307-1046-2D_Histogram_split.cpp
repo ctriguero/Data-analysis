@@ -88,10 +88,12 @@ int main( int argc, const char* argv[] )
 		cout << "    -------------------------------------------------------------------------------------------------------------------" << std::endl ;
 		cout << BOLDRED << "    Execution: ./a.out file.dat [+flags]" << RESET << std::endl ; 
 		cout << BOLDRED << "    Mandatory flags:" << RESET << std::endl ; 
-		cout << "    -bins" << "\t" << "    to set the number of kbins (e.g. ./a.out file.dat -bins 100) default bins=100" << std::endl ;
+		cout << "    -bins" << "\t" << "    to set the number of kbins (e.g. ./a.out file.dat -bins 100) default bins=1000" << std::endl ;
 		cout << BOLDRED << "    Optional flags:" << RESET << std::endl ;
 		cout << "    -h" << "\t" << "    to get help  (e.g. ./a.out -help)" << std::endl ;
-		cout << "    -l" << "\t" << "    to set the number of layers for the iso-frequency" << std::endl ;  
+		cout << "    -l" << "\t" << "    to set the number of layers for the iso-frequency (8 by default)" << std::endl ;  
+		cout << "    -g" << "\t" << "    To directly generate a graph of the distribution" << std::endl ;
+		cout << "    -d" << "\t" << "    To also output distributions at each size i.e D(K|S)" << std::endl ;  
 		cout << std::endl ;
 		return (0) ;
 	}
@@ -110,6 +112,8 @@ int main( int argc, const char* argv[] )
 
 	unsigned int Kbins = 1000 ;		// Default Number of Kbins 
 	unsigned int Layers = 8 ;
+	std::string Graph = "No" ;   // // Default graph no
+	std::string Distributions = "No" ;   // // Default graph no
 	
 	for ( int k = 1; k < argc ; ++k )
 	{
@@ -129,7 +133,8 @@ int main( int argc, const char* argv[] )
 		}
 		if ( ( argv[k] == std::string("-kbins") ) || ( argv[k] == std::string("-kbin") )  || ( argv[k] == std::string("-kb") )  || ( argv[k] == std::string("-b") ) ) { Kbins = atoi(argv[k+1]) ; }
 		if ( ( argv[k] == std::string("-layers") ) || ( argv[k] == std::string("-Layers") )  || ( argv[k] == std::string("-l") )  || ( argv[k] == std::string("-L") ) ) { Layers = atoi(argv[k+1]) ; }
-//		if ( ( argv[k] == std::string("-gle") ) || ( argv[k] == std::string("-g") )  || ( argv[k] == std::string("-GLE") ) ) { Ly = atoi(argv[k+1]) ; }
+		if ( ( argv[k] == std::string("-g") ) || ( argv[k] == std::string("-graph") ) || ( argv[k] == std::string("-G") )  || ( argv[k] == std::string("-gle") )  || ( argv[k] == std::string("-GLE") ) ) { Graph = "Yes" ; }
+		if ( ( argv[k] == std::string("-d") ) || ( argv[k] == std::string("-D") )  || ( argv[k] == std::string("-distributions") ) ) { Distributions = "Yes" ; }
 	}
 
 	cout << YELLOW << "    -> Iso-frequency layers set to: " << BOLDYELLOW << Layers << RESET << endl ;
@@ -137,6 +142,14 @@ int main( int argc, const char* argv[] )
 	
 	double Smaxval, Sminval, Kmaxval, Kminval ;
 	
+	if ( Graph == "Yes" ) 
+	{
+		cout << YELLOW << "    -> Graph option set to yes: " << BOLDYELLOW << RESET << endl ; 
+	}
+	if ( Distributions == "Yes" ) 
+	{
+		cout << YELLOW << "    -> Conditional distributions option set to yes: " << BOLDYELLOW << RESET << endl ; 
+	}
 	
 	// Count execution time
 	int start_s=clock();
@@ -296,45 +309,47 @@ int main( int argc, const char* argv[] )
 
 
 
-////	// BEGIN D(K|S): Conditional probability for each size. Each size in one file, and max probability path over space <K,S>.
-////	std::cout << YELLOW << "    -> Storing conditional probability density for each of the " << RESET << BOLDYELLOW << Sbins-1 << " sizes " << RESET << endl ;
-////	std::vector<double> Ssection ;
-////	ofstream MAXPPATH ;
-////	MAXPPATH.open ("Likely_SK_path.dat", ios::out | ios::trunc); // All computed densities inside cylinders
-////	
-////	for ( int ns = 1; ns < Sbins ; ++ns )
-////	{
-////		// Naming different size distributions
-////		std::ostringstream dd;
-////                std::ofstream K_PDF_at_S;
-////		if (   ns <= 9 ) { dd << "DKatS_no_000" << ns << ".dat" ;}
-////		if ( ( ns > 9 ) && ( ns <= 99 ) ) { dd << "DKatS_no_00" << ns << ".dat" ;}
-////		if ( ( ns > 99 ) && ( ns <= 999 ) ) { dd << "DKatS_no_0" << ns << ".dat" ;}
-////		if ( ( ns > 999 ) && ( ns <= 9999 ) ) { dd << "DKatS_no_" << ns << ".dat" ;}
-////		
-////		K_PDF_at_S.open(dd.str().c_str());
+	// BEGIN D(K|S): Conditional probability for each size. Each size in one file, and max probability path over space <K,S>.
+	if ( Distributions == "Yes" ) 
+	{	
+		std::cout << YELLOW << "    -> Storing conditional probability density for each of the " << RESET << BOLDYELLOW << Sbins-1 << " sizes " << RESET << endl ;
+		std::vector<double> Ssection ;
+		ofstream MAXPPATH ;
+		MAXPPATH.open ("Likely_SK_path.dat", ios::out | ios::trunc); // All computed densities inside cylinders
+		
+		for ( int ns = 1; ns < Sbins ; ++ns )
+		{
+			// Naming different size distributions
+			std::ostringstream dd;
+			std::ofstream K_PDF_at_S;
+			if (   ns <= 9 ) { dd << "DKatS_no_000" << ns << ".dat" ;}
+			if ( ( ns > 9 ) && ( ns <= 99 ) ) { dd << "DKatS_no_00" << ns << ".dat" ;}
+			if ( ( ns > 99 ) && ( ns <= 999 ) ) { dd << "DKatS_no_0" << ns << ".dat" ;}
+			if ( ( ns > 999 ) && ( ns <= 9999 ) ) { dd << "DKatS_no_" << ns << ".dat" ;}
+		
+			K_PDF_at_S.open(dd.str().c_str());	
 
-////		unsigned int LikelyPathK = 0 ;
-////		
-////		for ( int nk = 0; nk < Kbins ; ++nk )
-////		{
-////			K_PDF_at_S << nk*KInterval+KInterval/2.0 << "\t" << Frequency[ns][nk] << std::endl ;
+			unsigned int LikelyPathK = 0 ;
+			
+			for ( int nk = 0; nk < Kbins ; ++nk )
+			{
+				K_PDF_at_S << nk*KInterval+KInterval/2.0 << "\t" << Frequency[ns][nk] << std::endl ;
 
-////			if ( Frequency[ns][nk] > LikelyPathK ) { LikelyPathK = Frequency[ns][nk] ; }
-////		}
-////		K_PDF_at_S.close () ;
-////		
-////		for ( int nk = 0; nk < Kbins ; ++nk ) 
-////		{
-////			if ( ( Frequency[ns][nk] == LikelyPathK ) && ( ns > 2 ) ) 
-////			{
-////				MAXPPATH << ns << "\t" << nk*KInterval+KInterval/2.0 << std::endl ; 
-//////				cout << nk << "    " << ns << "    " << nk*KInterval+KInterval/2.0 << std::endl ;
-////			}
-////		}	
-////	}
-////	MAXPPATH.close () ;
-////	// END D(K|S): Conditional probability for each size. Each size in one file, and max probability path over space <K,S>.
+				if ( Frequency[ns][nk] > LikelyPathK ) { LikelyPathK = Frequency[ns][nk] ; }
+			}
+			K_PDF_at_S.close () ;
+		
+			for ( int nk = 0; nk < Kbins ; ++nk ) 
+			{
+				if ( ( Frequency[ns][nk] == LikelyPathK ) && ( ns > 2 ) ) 
+				{
+					MAXPPATH << ns << "\t" << nk*KInterval+KInterval/2.0 << std::endl ; 
+				}
+			}	
+		}
+		MAXPPATH.close () ;
+	}
+	// END D(K|S): Conditional probability for each size. Each size in one file, and max probability path over space <K,S>.
 
 
 

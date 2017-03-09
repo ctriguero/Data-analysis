@@ -8,7 +8,7 @@ sub Kmin x
    return 2*(x-2)+2
 end sub
 
-Layers = 40
+Layers = 100
 
 set texlabels 1
 begin graph
@@ -61,6 +61,72 @@ begin graph
 	data Layer_no_0039.dat d39
 	data Layer_no_0040.dat d40
 
+	data Layer_no_0041.dat d41
+	data Layer_no_0042.dat d42
+	data Layer_no_0043.dat d43
+	data Layer_no_0044.dat d44
+	data Layer_no_0045.dat d45
+	data Layer_no_0046.dat d46
+	data Layer_no_0047.dat d47
+	data Layer_no_0048.dat d48
+	data Layer_no_0049.dat d49
+	data Layer_no_0050.dat d50
+
+	data Layer_no_0051.dat d51
+	data Layer_no_0052.dat d52
+	data Layer_no_0053.dat d53
+	data Layer_no_0054.dat d54
+	data Layer_no_0055.dat d55
+	data Layer_no_0056.dat d56
+	data Layer_no_0057.dat d57
+	data Layer_no_0058.dat d58
+	data Layer_no_0059.dat d59
+	data Layer_no_0060.dat d60
+
+	data Layer_no_0061.dat d61
+	data Layer_no_0062.dat d62
+	data Layer_no_0063.dat d63
+	data Layer_no_0064.dat d64
+	data Layer_no_0065.dat d65
+	data Layer_no_0066.dat d66
+	data Layer_no_0067.dat d67
+	data Layer_no_0068.dat d68
+	data Layer_no_0069.dat d69
+	data Layer_no_0070.dat d70
+
+	data Layer_no_0071.dat d71
+	data Layer_no_0072.dat d72
+	data Layer_no_0073.dat d73
+	data Layer_no_0074.dat d74
+	data Layer_no_0075.dat d75
+	data Layer_no_0076.dat d76
+	data Layer_no_0077.dat d77
+	data Layer_no_0078.dat d78
+	data Layer_no_0079.dat d79
+	data Layer_no_0080.dat d80
+
+	data Layer_no_0081.dat d81
+	data Layer_no_0082.dat d82
+	data Layer_no_0083.dat d83
+	data Layer_no_0084.dat d84
+	data Layer_no_0085.dat d85
+	data Layer_no_0086.dat d86
+	data Layer_no_0087.dat d87
+	data Layer_no_0088.dat d88
+	data Layer_no_0089.dat d89
+	data Layer_no_0090.dat d90
+
+	data Layer_no_0091.dat d91
+	data Layer_no_0092.dat d92
+	data Layer_no_0093.dat d93
+	data Layer_no_0094.dat d94
+	data Layer_no_0095.dat d95
+	data Layer_no_0096.dat d96
+	data Layer_no_0097.dat d97
+	data Layer_no_0098.dat d98
+	data Layer_no_0099.dat d99
+	data Layer_no_0100.dat d100
+
 
 !	for alpha = 1 to 20
 !		d[alpha] marker fsquare msize 0.11 color rgb((alpha-1)^0.5/(Layers-1)^0.5,(Layers-alpha-1)^7/(Layers-1)^7,(Layers-alpha-1)^4/(Layers-1)^4)
@@ -92,6 +158,9 @@ begin graph
 	
 	let d[Layers+2] = Kmin(x) from 2.8 to 57
 	d[Layers+2] line color black lwidth 0.05 lstyle 0
+
+        data Likely_SK_path.dat d[Layers+3]
+	d[Layers+3] line color black lwidth 0.05 lstyle 0
 	
 
 	xaxis min 1.5 max 60 !  log format "sci 0 10"
@@ -122,7 +191,7 @@ text Embryo
 amove xg(53) yg(0.4)
 text Mature
 
-set hei 0.15
+set hei 0.3
 set color black
 amove xg(42) yg(60)
 text Minimally-connected (Tree graph)
@@ -130,16 +199,3 @@ amove xg(25) yg(1500)
 text Fully-connected graph
 set color black
 
-
-
-! Configuration frame examples
-! Atomic-force microscopy image at the upper right corner.
-amove xg(15.5) yg(2.7)
-begin name img
-   bitmap "frame_no_0004_S20.png" 1.5 1.5
-end name
-
-amove xg(35.5) yg(2.7)
-begin name img
-   bitmap "frame_no_0084_S41.png" 1.5 1.5
-end name
