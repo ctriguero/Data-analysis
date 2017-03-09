@@ -283,10 +283,10 @@ int main( int argc, const char* argv[] )
 		// Naming different layer levels files to generate the isomap
 		std::ostringstream ss;
                 std::ofstream LayerFile;
-		if (   k <= 9 ) { ss << "Layer_no_000" << k+1 << ".dat" ;}
-		if ( ( k > 9 ) && ( k <= 99 ) ) { ss << "Layer_no_00" << k+1 << ".dat" ;}
-		if ( ( k > 99 ) && ( k <= 999 ) ) { ss << "Layer_no_0" << k+1 << ".dat" ;}
-		if ( ( k > 999 ) && ( k <= 9999 ) ) { ss << "Layer_no_" << k+1 << ".dat" ;}
+		if (   k+1 <= 9 ) { ss << "Layer_no_000" << k+1 << ".dat" ;}
+		if ( ( k+1 > 9 ) && ( k+1 <= 99 ) ) { ss << "Layer_no_00" << k+1 << ".dat" ;}
+		if ( ( k+1 > 99 ) && ( k+1 <= 999 ) ) { ss << "Layer_no_0" << k+1 << ".dat" ;}
+		if ( ( k+1 > 999 ) && ( k+1 <= 9999 ) ) { ss << "Layer_no_" << k+1 << ".dat" ;}
 		
 		LayerFile.open(ss.str().c_str());
 
