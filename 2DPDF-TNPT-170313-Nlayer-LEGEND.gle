@@ -1,0 +1,263 @@
+include "color.gle"
+
+size 17 10
+
+sub Kmax x
+   return x*(x-1)
+end sub
+
+sub Kmin x
+   return 2*(x-2)+2
+end sub
+
+Layers = 100
+
+set texlabels 1
+begin graph
+!	scale  auto
+	size 11 8
+	xtitle "Size, $S$"
+	ytitle "Connectivity degree, $K$"
+	
+
+	data Layer_no_0001.dat d1
+	data Layer_no_0002.dat d2
+	data Layer_no_0003.dat d3
+	data Layer_no_0004.dat d4
+	data Layer_no_0005.dat d5
+	data Layer_no_0006.dat d6
+	data Layer_no_0007.dat d7
+	data Layer_no_0008.dat d8
+	data Layer_no_0009.dat d9
+	data Layer_no_0010.dat d10
+
+	data Layer_no_0011.dat d11
+	data Layer_no_0012.dat d12
+	data Layer_no_0013.dat d13
+	data Layer_no_0014.dat d14
+	data Layer_no_0015.dat d15
+	data Layer_no_0016.dat d16
+	data Layer_no_0017.dat d17
+	data Layer_no_0018.dat d18
+	data Layer_no_0019.dat d19
+	data Layer_no_0020.dat d20
+	
+	data Layer_no_0021.dat d21
+	data Layer_no_0022.dat d22
+	data Layer_no_0023.dat d23
+	data Layer_no_0024.dat d24
+	data Layer_no_0025.dat d25
+	data Layer_no_0026.dat d26
+	data Layer_no_0027.dat d27
+	data Layer_no_0028.dat d28
+	data Layer_no_0029.dat d29
+	data Layer_no_0030.dat d30
+
+	data Layer_no_0031.dat d31
+	data Layer_no_0032.dat d32
+	data Layer_no_0033.dat d33
+	data Layer_no_0034.dat d34
+	data Layer_no_0035.dat d35
+	data Layer_no_0036.dat d36
+	data Layer_no_0037.dat d37
+	data Layer_no_0038.dat d38
+	data Layer_no_0039.dat d39
+	data Layer_no_0040.dat d40
+
+	data Layer_no_0041.dat d41
+	data Layer_no_0042.dat d42
+	data Layer_no_0043.dat d43
+	data Layer_no_0044.dat d44
+	data Layer_no_0045.dat d45
+	data Layer_no_0046.dat d46
+	data Layer_no_0047.dat d47
+	data Layer_no_0048.dat d48
+	data Layer_no_0049.dat d49
+	data Layer_no_0050.dat d50
+
+	data Layer_no_0051.dat d51
+	data Layer_no_0052.dat d52
+	data Layer_no_0053.dat d53
+	data Layer_no_0054.dat d54
+	data Layer_no_0055.dat d55
+	data Layer_no_0056.dat d56
+	data Layer_no_0057.dat d57
+	data Layer_no_0058.dat d58
+	data Layer_no_0059.dat d59
+	data Layer_no_0060.dat d60
+
+	data Layer_no_0061.dat d61
+	data Layer_no_0062.dat d62
+	data Layer_no_0063.dat d63
+	data Layer_no_0064.dat d64
+	!data Layer_no_0065.dat d65
+	data Layer_no_0066.dat d66
+	data Layer_no_0067.dat d67
+	data Layer_no_0068.dat d68
+	data Layer_no_0069.dat d69
+	!data Layer_no_0070.dat d70
+
+	data Layer_no_0071.dat d71
+	data Layer_no_0072.dat d72
+	data Layer_no_0073.dat d73
+	data Layer_no_0074.dat d74
+	data Layer_no_0075.dat d75
+	data Layer_no_0076.dat d76
+	data Layer_no_0077.dat d77
+	data Layer_no_0078.dat d78
+	data Layer_no_0079.dat d79
+	data Layer_no_0080.dat d80
+
+	data Layer_no_0081.dat d81
+	data Layer_no_0082.dat d82
+	data Layer_no_0083.dat d83
+	data Layer_no_0084.dat d84
+	data Layer_no_0085.dat d85
+	data Layer_no_0086.dat d86
+	data Layer_no_0087.dat d87
+	data Layer_no_0088.dat d88
+	data Layer_no_0089.dat d89
+	data Layer_no_0090.dat d90
+
+	data Layer_no_0091.dat d91
+	data Layer_no_0092.dat d92
+	data Layer_no_0093.dat d93
+	data Layer_no_0094.dat d94
+	data Layer_no_0095.dat d95
+	data Layer_no_0096.dat d96
+	data Layer_no_0097.dat d97
+	!data Layer_no_0098.dat d98
+	data Layer_no_0099.dat d99
+	data Layer_no_0100.dat d100
+
+
+
+	for alpha = 1 to 64
+		d[alpha] marker fsquare msize 0.11 color rgb((alpha-1)^0.5/(Layers-1)^0.5+(Layers-alpha-1)^10/(Layers-1)^10,(Layers-alpha-1)^3/(Layers-1)^3,(Layers-alpha-1)^5/(Layers-1)^5)
+	next alpha
+
+
+	for alpha = 66 to 69
+		d[alpha] marker fsquare msize 0.11 color rgb((alpha-1)^0.5/(Layers-1)^0.5+(Layers-alpha-1)^10/(Layers-1)^10,(Layers-alpha-1)^3/(Layers-1)^3,(Layers-alpha-1)^5/(Layers-1)^5)
+	next alpha
+
+for alpha = 71 to 97
+		d[alpha] marker fsquare msize 0.11 color rgb((alpha-1)^0.5/(Layers-1)^0.5+(Layers-alpha-1)^10/(Layers-1)^10,(Layers-alpha-1)^3/(Layers-1)^3,(Layers-alpha-1)^5/(Layers-1)^5)
+	next alpha
+
+for alpha = 99 to Layers
+		d[alpha] marker fsquare msize 0.11 color rgb((alpha-1)^0.5/(Layers-1)^0.5+(Layers-alpha-1)^10/(Layers-1)^10,(Layers-alpha-1)^3/(Layers-1)^3,(Layers-alpha-1)^5/(Layers-1)^5)
+	next alpha
+
+
+	let d[Layers+1] = Kmax(x) from 2.0 to 55 !xmin =2.8
+	d[Layers+1] line color black lwidth 0.05 lstyle 9
+	
+	let d[Layers+2] = Kmin(x) from 2.0 to 55 !xmin =2.8
+	d[Layers+2] line color black lwidth 0.05 lstyle 0
+
+        data Likely_SK_path.dat d[Layers+3]
+	d[Layers+3] line color seagreen lwidth 0.05 lstyle 0
+
+	data Expected_SK_path.dat d[Layers+4]=c1,c2
+	d[Layers+4] line color orange lwidth 0.05 lstyle 0
+
+	data Expected_SK_path.dat d[Layers+5]=c1,c5
+	d[Layers+5] line color gray lwidth 0.05 lstyle 8
+
+	data Expected_SK_path.dat d[Layers+6]=c1,c6
+	d[Layers+6] line color gray lwidth 0.05 lstyle 8
+	
+
+	xaxis min 1.5 max 56 !  log format "sci 0 10"
+	yaxis min 1.0 max 3500 log format "sci 0 10"
+	xplaces 2 3 4 5 6 7 8 9 15 20 30 40 50 55
+	xnames "2" "3" "4" "5" "6" "7" "8" "9" "15" "20" "30" "40" "50" "55"
+end graph
+
+set hei 0.3
+!amove xg(xgmax)+0.25 yg(ygmin)
+!color_range_vertical zmin 0 zmax 1 zstep 0.25 pixels 100 palette carles format "fix 2"
+
+amove xg(xgmin) yg(ygmax)+0.5
+color_range_horizontal zmin 0 zmax 1 zstep 0.25 pixels 100 palette carles format "fix 2"
+
+amove xg(0.5*(xgmax+xgmin)) yg(ygmax)+1.15
+tex "$\displaystyle D(S;K)$"
+
+
+begin key
+pos bc
+nobox
+line color black lwidth 0.05 lstyle 9 text "$K_{\rm max}(S)$"
+line color black lwidth 0.05 text "$K_{\rm min}(S)$"
+line color seagreen lwidth 0.05 text "$\max\left[D(K|S)\right]$"
+line color orange lwidth 0.05 text "$\left<K\right>$"
+end key
+
+!set hei 0.3
+!begin key
+!pos br
+!nobox
+!text "T-clustering Metadynamics - NPT" color red 
+!text "Histogram over $5.0\cdot 10^5$ data points"
+!end key
+
+set hei 0.3
+amove xg(3) yg(0.4)
+text Embryo
+amove xg(53) yg(0.4)
+text Mature
+
+set hei 0.3
+set color black
+amove xg(21) yg(20)
+text Minimally-connected
+amove xg(21) yg(1500)
+text Fully-connected
+set color black
+
+
+!rgb((alpha-1)^0.5/(Layers-1)^0.5+(Layers-alpha-1)^10/(Layers-1)^10,(Layers-alpha-1)^3/(Layers-1)^3,(Layers-alpha-1)^5/(Layers-1)^5)
+
+!(alpha-1)^0.5/(Layers-1)^0.5+(Layers-alpha-1)^10/(Layers-1)^10
+!(Layers-alpha-1)^3/(Layers-1)^3
+!(Layers-alpha-1)^5/(Layers-1)^5
+
+! Z goes from 0 to 1
+sub carles z
+   ! a custom palette ranging from white, yellow, red, black
+   local rr = 0
+   local gg = 0
+   local bb = 0
+   ! RED
+   rr = (100*z)^0.5/(Layers-1)^0.5+(Layers-100*z)^10/(Layers-1)^10
+   ! GREEN
+   gg = (Layers-100*z)^3/(Layers-1)^3
+   ! BLUE
+   bb = (Layers-100*z)^5/(Layers-1)^5
+   return rgb(rr,gg,bb)
+end sub
+
+sub special z
+   ! a custom palette ranging from white, yellow, red, black
+   local rr = 0
+   local gg = 0
+   local bb = 0
+   dom1=0.05!0.035 !0.25
+   dom2=0.3!0.965
+   ! RED
+   if (z <= dom1)                  then rr = 1
+   if (z > dom1) and (z <= dom2)   then rr = 1
+   if (z > dom2)                   then rr = -1/(dom2-1)+z/(dom2-1)
+   ! GREEN
+   if (z <= dom1)                  then gg = 1
+   if (z > dom1) and (z <= dom2)   then gg = z/(dom1-dom2)-dom2/(dom1-dom2)
+   if (z > dom2)                   then gg = 0
+   ! BLUE
+   if (z <= dom1)                  then bb = (1-z/dom1)
+   if (z > dom1) and (z <= dom2)   then bb = 0
+   if (z > dom2)                   then bb = 0
+   return rgb(rr,gg,bb)
+end sub
+
