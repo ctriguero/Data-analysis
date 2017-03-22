@@ -417,6 +417,8 @@ int main( int argc, const char* argv[] )
 	GLE_DSK << "\t" << "bb = (Layers-Layers*z)^5/(Layers-1)^5" << std::endl ;
 	GLE_DSK << "\t" << "return rgb(rr,gg,bb)" << std::endl ;
 	GLE_DSK << "end sub" << std::endl ;
+	system("gpdf DSK.gle") ; // Notice that: (1) gle needs to be install. (2) This is my own command. (3) Otherwise gle -d pdf DSK.gle
+	system("rm Layer_no_*.dat") ; // Erase anoying layer files
 	// END Feet for GLE script to plot D(S;K)
 
 
