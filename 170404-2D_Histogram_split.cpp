@@ -369,7 +369,7 @@ int main( int argc, const char* argv[] )
 	GLE_DSK << "amove xg(xgmin) yg(ygmax)+0.5" << std::endl ;
 	GLE_DSK << "color_range_horizontal zmin " << "0" << " zmax " << "1" << " zstep " << "0.25" << " pixels Layers palette carles format \"fix 4\"" << std::endl ;
 	GLE_DSK << "amove xg(0.5*(xgmax+xgmin)) yg(ygmax)+1.15" << std::endl ;
-	GLE_DSK << "tex \"$\\displaystyle \\mathcal{D}(S;K)$\"" << std::endl ;
+	GLE_DSK << "tex \"$\\displaystyle \\mathcal{D}^{\\rm B}(S;K)$\"" << std::endl ;
 	GLE_DSK << "begin key" << std::endl ;
 	GLE_DSK << "pos br" << std::endl ;
 	GLE_DSK << "nobox" << std::endl ;
@@ -383,7 +383,7 @@ int main( int argc, const char* argv[] )
 	GLE_DSK << "begin key" << std::endl ;
 	GLE_DSK << "pos tl" << std::endl ;
 	GLE_DSK << "nobox" << std::endl ;
-	GLE_DSK << "text \"Biased $\\displaystyle \\mathcal{D}(S;K)$\"" << std::endl ;
+	GLE_DSK << "text \"Biased: $\\displaystyle \\mathcal{D}^{\\rm B}(S;K)$\"" << std::endl ;
 	GLE_DSK << "end key" << std::endl ;
 
 	GLE_DSK << "!set hei 0.3" << std::endl ;
