@@ -185,9 +185,9 @@ int main( int argc, const char* argv[] )
 	while (getline(InputFile, line))
 	{
 		std::stringstream aa(line) ;
-		aa >> w >> x >> y ;
+		aa >> w >> x >> y >> z ;
 		SVector.push_back (x) ;
-		KVector.push_back (y) ;
+		KVector.push_back (z) ;
 	}
 	InputFile.close() ;
 	// END Read Size, S and Connectivity, K values into vectors.
@@ -354,8 +354,8 @@ int main( int argc, const char* argv[] )
 	GLE_DSK << "data Expected_SK_path.dat d[Layer+4]=c1,c2" << std::endl ;
 	GLE_DSK << "d[Layer+4] line color orange lwidth 0.025 lstyle 0" << std::endl ;
 
-//	GLE_DSK << "xaxis min 1.5 max 56" << std::endl ;
-	GLE_DSK << "xaxis min 1.5 max 56  log format \"sci 0 10\"" << std::endl ;
+	GLE_DSK << "xaxis min 1.5 max 56" << std::endl ;
+//	GLE_DSK << "xaxis min 1.5 max 56  log format \"sci 0 10\"" << std::endl ;
 	GLE_DSK << "yaxis min 1.0 max 3500 log format \"sci 0 10\"" << std::endl ;
 
 	GLE_DSK << "xplaces 2 3 4 5 6 7 8 9 15 20 30 40 50 55" << std::endl ;
