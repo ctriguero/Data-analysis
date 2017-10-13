@@ -1,6 +1,8 @@
 # Data-analysis
 
-Histogram:
+This is a set of programs useful in general data analysis
+
+# Histogram
 There are two versions of this program:
 
 * Version 1. It acts assuming that the cv's are correct and do not need reweighting. In this case the program calculates the histogram. Once the histogram is calculated it also calculates different statistical measures.
@@ -12,3 +14,5 @@ CV1 CV2 Probability
 Program to preform histogram analysis over a set of continuous real data. It detects the minimum and maximum values of the data set. The number of bins must be provided. Fast run:
 g++ code.cpp -o histogram
 ./histogram [FileToAnalize] -bins [N]
+
+# Draw frames
